@@ -17,6 +17,23 @@ public class Prescription implements Serializable {
     @JoinColumn(name = "appointment_id")
     private Appointment appointment;
 
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Long getPatientId() {
+        return (patient != null) ? patient.getId() : null;
+    }
+
+    
     public Long getId() {
         return id;
     }
