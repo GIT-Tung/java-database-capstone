@@ -24,6 +24,9 @@ public class Doctor {
     @Column(length = 20)
     private String phone;
 
+    @Column(nullable = false, length = 100)
+    private String password;
+
     // Available times for appointments
     @ElementCollection
     @CollectionTable(name = "doctor_available_times", joinColumns = @JoinColumn(name = "doctor_id"))
@@ -87,5 +90,13 @@ public class Doctor {
 
     public void setAvailableTimes(List<LocalDateTime> availableTimes) {
         this.availableTimes = availableTimes;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
