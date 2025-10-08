@@ -48,6 +48,10 @@ public class Doctor {
         return doctorId;
     }
 
+    public Long getId() {
+        return doctorId;
+    }
+
     public void setDoctorId(Long doctorId) {
         this.doctorId = doctorId;
     }
