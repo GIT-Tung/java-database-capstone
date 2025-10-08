@@ -1,38 +1,71 @@
 package com.project.back_end.models;
 
+import jakarta.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Appointment {
-    private String appointmentId;
-    private String doctorId;
-    private String patientId;
-    private LocalDateTime appointmentDate;
+@Entity
+public class Appointment implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
+    private LocalDateTime appointmentTime;
     private String status;
 
-    public Appointment(String appointmentId, String doctorId, String patientId, LocalDateTime appointmentDate, String status) {
-        this.appointmentId = appointmentId;
-        this.doctorId = doctorId;
-        this.patientId = patientId;
-        this.appointmentDate = appointmentDate;
-        this.status = status;
+    // --- Getter và Setter ---
+    public Long getId() {
+        return id;
     }
 
-    public String getAppointmentId() { return appointmentId; }
-    public String getDoctorId() { return doctorId; }
-    public String getPatientId() { return patientId; }
-    public LocalDateTime getAppointmentDate() { return appointmentDate; }
-    public String getStatus() { return status; }
+    public Doctor getDoctor() {
+        return doctor;
+    }
 
-    public void setAppointmentDate(LocalDateTime appointmentDate) { this.appointmentDate = appointmentDate; }
-    public void setStatus(String status) { this.status = status; }
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public LocalDateTime getAppointmentTime() {
+        return appointmentTime;
+    }
+
+    public void setAppointmentTime(LocalDateTime appointmentTime) {
+        this.appointmentTime = appointmentTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     @Override
     public String toString() {
         return "Appointment{" +
-                "appointmentId='" + appointmentId + '\'' +
-                ", doctorId='" + doctorId + '\'' +
-                ", patientId='" + patientId + '\'' +
-                ", appointmentDate=" + appointmentDate +
+                "id=" + id +
+                ", doctor=" + (doctor != null ? doctor.getId() : null) +
+                ", patient=" + (patient != null ? patient.getId() : null) +
+                ", appointmentTime=" + appointmentTime +
                 ", status='" + status + '\'' +
                 '}';
     }
